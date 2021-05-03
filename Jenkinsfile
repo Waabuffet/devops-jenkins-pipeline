@@ -1,7 +1,7 @@
 node {
     stage('Checkout') {
         dir('website') {
-            git url: 'https://github.com/Waabuffet/devops-website'
+            git url: 'https://github.com/Waabuffet/devops-website', branch: "main"
         }
         dir('test') {
             // git url: ''
