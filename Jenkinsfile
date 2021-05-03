@@ -4,8 +4,8 @@ node {
             git url: 'https://github.com/Waabuffet/devops-website'
         }
         dir('test') {
-            git url: ''
-            sh 'npm install'
+            // git url: ''
+            // sh 'npm install'
         }
     }
     stage('Build') {
