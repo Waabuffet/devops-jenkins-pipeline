@@ -10,8 +10,8 @@ node {
     }
     stage('Build') {
         dir(''){
-            def dockerfile = "Dockerfile-httpd"
-            docker.build("php-httpd:centos", "-f ${dockerfile} ../noSpacePipeline@script")
+            // def dockerfile = "Dockerfile-httpd"
+            docker.build("php-httpd:centos", "../noSpacePipeline@script/httpd_build")
             // docker.build("node:local", "./Dockerfile-nodejs")
         }
     }
