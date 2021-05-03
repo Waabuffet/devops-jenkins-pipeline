@@ -1,4 +1,5 @@
 node {
+    def checkout_dir = './noSpacePipeline@script'
     stage('Checkout') {
         dir('website') {
             git url: 'https://github.com/Waabuffet/devops-website', branch: "main"
@@ -16,6 +17,6 @@ node {
         }
     }
     stage('Deploy') {
-        sh './deploy.sh'
+        sh '${checkout_dir}/deploy.sh'
     }
 }
