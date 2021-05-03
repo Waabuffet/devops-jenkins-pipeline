@@ -9,8 +9,10 @@ node {
         }
     }
     stage('Build') {
-        docker.build("php-httpd:centos", "./Dockerfile-httpd")
-        // docker.build("node:local", "./Dockerfile-nodejs")
+        dir(''){
+            docker.build("php-httpd:centos", "./Dockerfile-httpd")
+            // docker.build("node:local", "./Dockerfile-nodejs")
+        }
     }
     stage('Deploy') {
         sh './deploy.sh'
