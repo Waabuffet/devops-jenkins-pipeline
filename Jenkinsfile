@@ -16,6 +16,8 @@ node {
         }
     }
     stage('Deploy') {
-        sh '../noSpacePipeline@script/deploy.sh'
+        dir('../noSpacePipeline@script'){
+            sh './deploy.sh'
+        }
     }
 }
