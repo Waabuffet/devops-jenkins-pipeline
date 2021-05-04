@@ -24,7 +24,7 @@ services:
     depends_on:
       - mysql
   testing:
-    image: node:centos
+    image: node:latest
     container_name: node_test
     volumes:
       - $FILE_PATH/$JOB_NAME/test:/home/test
