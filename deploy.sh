@@ -24,12 +24,12 @@ done
 #         sleep 1
 # done
 
-docker exec -i mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /home/centos/mydb.sql
+docker exec -i mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < "$FILE_PATH/$JOB_NAME@script/mydb.sql"
 
 echo "preparing php env"
-mkdir $FILE_PATH/website/db
-ENV_PHP=$FILE_PATH/website/db/env.php
-cp $FILE_PATH/env.php $ENV_PHP
+mkdir $FILE_PATH/$JOB_NAME/website/db
+ENV_PHP=$FILE_PATH/$JOB_NAME/website/db/env.php
+cp "$FILE_PATH/$JOB_NAME@script/env.php" $ENV_PHP
 
 sed -i "s/<MYSQL_HOST>/$mysql_ip/" $ENV_PHP
 sed -i "s/<MYSQL_PORT>/3306/" $ENV_PHP
@@ -42,9 +42,9 @@ echo "starting test"
 
 website_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' website)
 
-mkdir $FILE_PATH/test/env
-ENV_NODE=$FILE_PATH/test/env/env.js
-cp $FILE_PATH/env.js $ENV_NODE
+mkdir $FILE_PATH/$JOB_NAME/test/env
+ENV_NODE=$FILE_PATH/$JOB_NAME/test/env/env.js
+cp "$FILE_PATH/$JOB_NAME@script/env.js" $ENV_NODE
 
 sed -i "s/<METHOD>/$PROTOCOL_METHOD/" $ENV_NODE
 sed -i "s/<HOST>/$website_ip/" $ENV_NODE
