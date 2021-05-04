@@ -16,9 +16,13 @@ docker-compose up -d
 mysql_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql)
 
 echo "waiting for mysql to be up..."
-while ! (nc -z -w30 $mysql_ip 3306); do
-        sleep 1
+while ! docker exec mysql mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "SELECT 1" >/dev/null 2>&1; do
+    sleep 1
 done
+
+# while ! (nc -z -w30 $mysql_ip 3306); do
+#         sleep 1
+# done
 
 docker exec -i mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /home/centos/mydb.sql
 
