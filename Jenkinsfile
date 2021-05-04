@@ -5,7 +5,7 @@ node {
         }
         dir('test') {
             git url: 'https://github.com/Waabuffet/devops-test', branch: "main"
-            sh 'npm install'
+            // sh 'npm install' //should be from docker
         }
     }
     stage('Build') {
@@ -18,6 +18,7 @@ node {
     stage('Deploy') {
         dir('../noSpacePipeline@script'){
             sh './deploy.sh'
+            // sh './run-test.sh'
         }
     }
 }
