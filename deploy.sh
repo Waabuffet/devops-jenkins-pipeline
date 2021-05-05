@@ -18,7 +18,7 @@ mysql_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{
 
 echo "waiting for mysql to be up..."
 while ! docker exec mysql mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "SELECT 1"; do
-    sleep 1
+    sleep 2
 done
 
 # while ! (nc -z -w30 $mysql_ip 3306); do
