@@ -1,4 +1,4 @@
-FILE_PATH=/home/centos/jenkins_home/workspace
+FILE_PATH=/home/dominique/Desktop/devops_IGE/final/jenkins_home/workspace
 JOB_NAME=noSpacePipeline
 MYSQL_ROOT_PASSWORD=qweqwe123
 MYSQL_DATABASE=my_website
