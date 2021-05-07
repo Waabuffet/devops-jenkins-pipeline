@@ -1,6 +1,6 @@
 module.exports = {
     method : '<METHOD>',
     host : '<HOST>',
-    port: '<PORT>',
+    port : '<PORT>',
     api : '<API>'
 };
