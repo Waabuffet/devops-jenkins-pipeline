@@ -4,6 +4,10 @@ mv -v ./env ./.env
 
 current_dir=$(pwd)
 parent_dir="$(dirname "$(current_dir)")"
+
+echo "current dir: $current_dir"
+echo "parent dir: $parent_dir"
+
 echo "cleaning up"
 
 # docker-compose down
