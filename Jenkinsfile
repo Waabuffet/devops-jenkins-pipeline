@@ -20,5 +20,8 @@ node {
             sh './deploy.sh'
             // sh './run-test.sh'
         }
+        dir(''){
+            cleanWs()
+        }
     }
 }

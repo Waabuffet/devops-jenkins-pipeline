@@ -7,3 +7,4 @@ MYSQL_PASSWORD=qweqwe123
 WEBSITE_PORT=8080
 PROTOCOL_METHOD=http
 TESTING_ROUTE=/api/getmessage.php
+JENKINS_WORKSPACE=/var/jenkins_home/workspace
