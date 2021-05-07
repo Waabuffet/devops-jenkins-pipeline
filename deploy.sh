@@ -2,11 +2,7 @@
 mv -v ./env ./.env
 . ./.env
 
-current_dir=$(pwd)
-parent_dir="$(dirname "$(current_dir)")"
-
-echo "current dir: $current_dir"
-echo "parent dir: $parent_dir"
+parent_dir=/var/jenkins_home/workspace
 
 echo "cleaning up"
 
