@@ -2,6 +2,8 @@
 mv -v ./env ./.env
 . ./.env
 
+current_dir=$(pwd)
+parent_dir="$(dirname "$(current_dir)")"
 echo "cleaning up"
 
 # docker-compose down
@@ -26,12 +28,12 @@ done
 #         sleep 1
 # done
 
-docker exec -i mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < "$FILE_PATH/$JOB_NAME@script/mydb.sql"
+docker exec -i mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < "$parent_dir/$JOB_NAME@script/mydb.sql"
 
 echo "preparing php env"
-mkdir $FILE_PATH/$JOB_NAME/website/db
-ENV_PHP=$FILE_PATH/$JOB_NAME/website/db/env.php
-cp "$FILE_PATH/$JOB_NAME@script/env.php" $ENV_PHP
+mkdir $parent_dir/$JOB_NAME/website/db
+ENV_PHP=$parent_dir/$JOB_NAME/website/db/env.php
+cp "$parent_dir/$JOB_NAME@script/env.php" $ENV_PHP
 
 sed -i "s/<MYSQL_HOST>/$mysql_ip/" $ENV_PHP
 sed -i "s/<MYSQL_PORT>/3306/" $ENV_PHP
@@ -44,9 +46,9 @@ echo "starting test"
 
 website_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' website)
 
-mkdir $FILE_PATH/$JOB_NAME/test/env
-ENV_NODE=$FILE_PATH/$JOB_NAME/test/env/env.js
-cp "$FILE_PATH/$JOB_NAME@script/env.js" $ENV_NODE
+mkdir $parent_dir/$JOB_NAME/test/env
+ENV_NODE=$parent_dir/$JOB_NAME/test/env/env.js
+cp "$parent_dir/$JOB_NAME@script/env.js" $ENV_NODE
 
 sed -i "s/<METHOD>/$PROTOCOL_METHOD/" $ENV_NODE
 sed -i "s/<HOST>/$website_ip/" $ENV_NODE
