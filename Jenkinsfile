@@ -19,6 +19,7 @@ node {
         dir('../noSpacePipeline@script'){
             sh './deploy.sh'
             // sh './run-test.sh'
+            cleanWs()
         }
         dir(''){
             cleanWs()
