@@ -12,8 +12,8 @@ echo "cleaning up"
 
 # pull repo
 
-echo "servers already up"
-# docker-compose up -d
+echo "starting servers"
+docker-compose up -d
 
 mysql_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' mysql)
 
