@@ -53,7 +53,7 @@ cp "$parent_dir/$JOB_NAME@script/env.js" $ENV_NODE
 sed -i "s/<METHOD>/$PROTOCOL_METHOD/" $ENV_NODE
 sed -i "s/<HOST>/$website_ip/" $ENV_NODE
 sed -i "s/<PORT>/$WEBSITE_PORT/" $ENV_NODE
-sed -i "s/<API_ROUTE>/$TESTING_ROUTE/" $ENV_NODE
+sed -i "s/<API>/$TESTING_ROUTE/" $ENV_NODE
 
 # $FILE_PATH/$JOB_NAME/run-test.sh
 
