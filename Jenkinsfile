@@ -17,10 +17,14 @@ node {
     stage('Deploy') {
         dir('../noSpacePipeline@script'){
             sh './deploy.sh'
+        }
+    }
+    stage('Test') {
+        dir('../noSpacePipeline@script'){
             sh './run-test.sh'
         }
     }
-    stage('Clean up'){
+    stage('Clean up') {
         dir('../noSpacePipeline@script'){
             sh './shutdown.sh'
             cleanWs()
