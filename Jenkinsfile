@@ -1,4 +1,13 @@
 node {
+    stage('Clean up') {
+        dir('../noSpacePipeline@script'){
+            sh './shutdown.sh'
+            cleanWs()
+        }
+        dir(''){
+            cleanWs()
+        }
+    }
     stage('Checkout') {
         dir('website') {
             git url: 'https://github.com/Waabuffet/devops-website', branch: "main"
@@ -22,15 +31,6 @@ node {
     stage('Test') {
         dir('../noSpacePipeline@script'){
             sh './run-test.sh'
-        }
-    }
-    stage('Clean up') {
-        dir('../noSpacePipeline@script'){
-            sh './shutdown.sh'
-            cleanWs()
-        }
-        dir(''){
-            cleanWs()
         }
     }
 }
