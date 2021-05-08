@@ -40,13 +40,13 @@ ENV_NODE=$JENKINS_WORKSPACE/$JOB_NAME/test/env/env.js
 cp "$JENKINS_WORKSPACE/$JOB_NAME@script/env.js" $ENV_NODE
 
 sed -i "s/<METHOD>/$PROTOCOL_METHOD/" $ENV_NODE
-sed -i "s/<HOST>/$website_ip/" $ENV_NODE
+sed -i "s/<HOST>/$WEBSITE_HOST/" $ENV_NODE
 sed -i "s/<PORT>/$WEBSITE_PORT/" $ENV_NODE
 sed -i "s~<API>~$TESTING_ROUTE~" $ENV_NODE
+# we used '~' above instead of '/' because the TESTING_ROUTE contains a path with '/'
+# we can use any character as delimiter with sed
 
-# wait for response file to be there
-echo "waiting for test results..."
-# while [ ! -f $FILE_PATH/result.txt ]; do sleep 1; done
-
-echo "shutting down servers"
-docker-compose down
+# specify test report path
+TEST_PACKAGE=$JENKINS_WORKSPACE/$JOB_NAME/test/package.json
+REPORT_PATH=$JENKINS_WORKSPACE/$JOB_NAME/$REPORT_NAME
+sed -i "s~<REPORT_PATH>~$REPORT_PATH~" $TEST_PACKAGE
