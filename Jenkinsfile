@@ -1,6 +1,6 @@
 node {
     stage('Clean up') {
-        dir('../noSpacePipeline@script'){
+        dir('../devops_website@script'){
             sh './shutdown.sh'
             cleanWs()
         }
@@ -19,17 +19,17 @@ node {
     stage('Build') {
         dir(''){
             // def dockerfile = "Dockerfile-httpd"
-            docker.build("php-httpd:centos", "../noSpacePipeline@script/httpd_build")
+            docker.build("php-httpd:centos", "../devops_website@script/httpd_build")
             // docker.build("node:local", "./Dockerfile-nodejs")
         }
     }
     stage('Deploy') {
-        dir('../noSpacePipeline@script'){
+        dir('../devops_website@script'){
             sh './deploy.sh'
         }
     }
     stage('Test') {
-        dir('../noSpacePipeline@script'){
+        dir('../devops_website@script'){
             sh './run-test.sh'
         }
     }
