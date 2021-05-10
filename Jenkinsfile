@@ -17,9 +17,9 @@ node {
         }
     }
     stage('Build') {
-        dir(''){
+        dir('../devops_website@script'){
             // def dockerfile = "Dockerfile-httpd"
-            docker.build("php-httpd:centos", "../devops_website@script/httpd_build")
+            docker.build("php-httpd:centos", "./httpd_build")
             // docker.build("node:local", "./Dockerfile-nodejs")
         }
     }
