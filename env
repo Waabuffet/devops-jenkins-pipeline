@@ -1,5 +1,5 @@
 FILE_PATH=/home/centos/jenkins_home/workspace
-JOB_NAME=noSpacePipeline
+JOB_NAME=devops_website
 JENKINS_WORKSPACE=/var/jenkins_home/workspace
 
 MYSQL_ROOT_PASSWORD=qweqwe123
