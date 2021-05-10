@@ -2,9 +2,8 @@ node {
     stage('Clean up') {
         dir('../devops_website@script'){
             sh './shutdown.sh'
-            cleanWs()
         }
-        dir(''){
+        dir('../devops_website'){
             cleanWs()
         }
     }
