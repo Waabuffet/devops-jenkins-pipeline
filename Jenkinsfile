@@ -21,20 +21,26 @@ pipeline{
             }
         }
         stage('Build') {
-            dir('../devops_website@script'){
-                // def dockerfile = "Dockerfile-httpd"
-                docker.build("php-httpd:centos", "./httpd_build")
-                // docker.build("node:local", "./Dockerfile-nodejs")
+            steps{
+                dir('../devops_website@script'){
+                    // def dockerfile = "Dockerfile-httpd"
+                    docker.build("php-httpd:centos", "./httpd_build")
+                    // docker.build("node:local", "./Dockerfile-nodejs")
+                }
             }
         }
         stage('Deploy') {
-            dir('../devops_website@script'){
-                sh './deploy.sh'
+            steps{
+                dir('../devops_website@script'){
+                    sh './deploy.sh'
+                }
             }
         }
         stage('Test') {
-            dir('../devops_website@script'){
-                sh './run-test.sh'
+            steps{
+                dir('../devops_website@script'){
+                    sh './run-test.sh'
+                }
             }
         }
     }
