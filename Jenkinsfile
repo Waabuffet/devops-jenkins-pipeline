@@ -4,16 +4,20 @@ pipeline{
     }
     stages{
         stage('Clean up') {
-            dir('../devops_website'){
-                cleanWs()
+            steps{
+                dir('../devops_website'){
+                    cleanWs()
+                }
             }
         }
         stage('Checkout') {
-            dir('website') {
-                git url: 'https://github.com/Waabuffet/devops-website', branch: "dev-branch"
-            }
-            dir('test') {
-                git url: 'https://github.com/Waabuffet/devops-test', branch: "main"
+            steps{
+                dir('website') {
+                    git url: 'https://github.com/Waabuffet/devops-website', branch: "dev-branch"
+                }
+                dir('test') {
+                    git url: 'https://github.com/Waabuffet/devops-test', branch: "main"
+                }
             }
         }
         stage('Build') {
