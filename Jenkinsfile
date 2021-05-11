@@ -33,17 +33,19 @@ node {
     } catch (e){
         throw e
     } finally {
-        dir('../devops_website@script'){
-            sh './shutdown.sh'
-        }
-        if(currentBuild.currentResult == 'SUCCESS') {
-            mail to: 'developerdoms@gmail.com',
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "Check Build output ${env.BUILD_URL}"
-        } else {
-            mail to: 'developerdoms@gmail.com',
-                subject: "Failed Build: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}"
+        stage('Post Build') {
+            dir('../devops_website@script'){
+                sh './shutdown.sh'
+            }
+            if(currentBuild.currentResult == 'SUCCESS') {
+                emailext to: 'developerdoms@gmail.com',
+                    subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                    body: "Check Build output ${env.BUILD_URL}"
+            } else {
+                emailext to: 'developerdoms@gmail.com',
+                    subject: "Failed Build: ${currentBuild.fullDisplayName}",
+                    body: "Something is wrong with ${env.BUILD_URL}"
+            }
         }
     }
 }
