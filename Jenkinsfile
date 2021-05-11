@@ -1,8 +1,5 @@
 node {
     stage('Clean up') {
-        dir('../devops_website@script'){
-            sh './shutdown.sh'
-        }
         dir('../devops_website'){
             cleanWs()
         }
@@ -31,5 +28,22 @@ node {
         dir('../devops_website@script'){
             sh './run-test.sh'
         }
+    }
+}
+post {
+    always {
+        dir('../devops_website@script'){
+            sh './shutdown.sh'
+        }
+    }
+    success {
+        mail to: 'developerdoms@gmail.com',
+            subject: "Build Successful: ${currentBuild.fullDisplayName}",
+            body: "Check Build output ${env.BUILD_URL}"
+    }
+    failure {
+        mail to: 'developerdoms@gmail.com',
+            subject: "Failed Build: ${currentBuild.fullDisplayName}",
+            body: "Something is wrong with ${env.BUILD_URL}"
     }
 }
