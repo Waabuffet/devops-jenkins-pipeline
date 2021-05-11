@@ -23,9 +23,11 @@ pipeline{
         stage('Build') {
             steps{
                 dir('../devops_website@script'){
-                    // def dockerfile = "Dockerfile-httpd"
-                    docker.build("php-httpd:centos", "./httpd_build")
-                    // docker.build("node:local", "./Dockerfile-nodejs")
+                    script{
+                        // def dockerfile = "Dockerfile-httpd"
+                        docker.build("php-httpd:centos", "./httpd_build")
+                        // docker.build("node:local", "./Dockerfile-nodejs")
+                    }
                 }
             }
         }
