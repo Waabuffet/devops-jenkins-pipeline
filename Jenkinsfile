@@ -39,6 +39,9 @@ node {
             dir('../devops_website@script'){
                 sh './shutdown.sh'
             }
+            dir('test') {
+                junit 'report.xml'
+            }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
