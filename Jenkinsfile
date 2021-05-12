@@ -1,4 +1,5 @@
 node {
+    def testResult = ''
     try{
         stage('Clean up') {
             dir('../devops_website'){
@@ -40,14 +41,14 @@ node {
                 sh './shutdown.sh'
             }
             dir('test') {
-                junit skipPublishingChecks: true, testResults: 'report.xml'
+                testResult = junit skipPublishingChecks: true, testResults: 'report.xml'
             }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                echo "failed test name: ${currentBuild.testResults}"
+                echo "failed test count: ${testResult.getFailCount()}"
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
                     body: "Something is wrong with ${env.BUILD_URL}, failed message: "
