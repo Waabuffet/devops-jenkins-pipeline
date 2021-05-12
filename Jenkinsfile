@@ -40,7 +40,7 @@ node {
                 sh './shutdown.sh'
             }
             dir('test') {
-                junit 'report.xml'
+                junit skipPublishingChecks: true, testResults: 'report.xml'
             }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
