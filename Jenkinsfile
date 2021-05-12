@@ -28,16 +28,18 @@ node {
         stage('Test') {
             dir('../devops_website@script'){
                 sh './run-test.sh'
+                currentBuild.result = 'SUCCESS'
             }
         }
     } catch (e){
+        currentBuild.result = 'FAILURE'
         throw e
     } finally {
         stage('Post Build') {
             dir('../devops_website@script'){
                 sh './shutdown.sh'
             }
-            if(currentBuild.currentResult == 'SUCCESS') {
+            if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
