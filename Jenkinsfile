@@ -49,7 +49,7 @@ node {
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
                 echo "failed test count: ${testResult.getFailCount()}"
-                def errorMessage = build.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
+                def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
                 echo "error message ${errorMessage}"
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
