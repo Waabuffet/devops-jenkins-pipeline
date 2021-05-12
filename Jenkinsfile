@@ -47,8 +47,7 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                final AbstractTestResultAction testResult = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
-                echo "failed test name: ${testResult.failedTest.fullName}"
+                echo "failed test name: ${currentBuild.testResult}"
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
                     body: "Something is wrong with ${env.BUILD_URL}, failed message: "
