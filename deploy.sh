@@ -47,9 +47,9 @@ sed -i "s~<API>~$TESTING_ROUTE~" $ENV_NODE
 # we can use any character as delimiter with sed
 
 # specify test report path
-TEST_PACKAGE=$JENKINS_WORKSPACE/$JOB_NAME/test/package.json
-REPORT_PATH=$JENKINS_WORKSPACE/$JOB_NAME/test/$REPORT_NAME
+# TEST_PACKAGE=$JENKINS_WORKSPACE/$JOB_NAME/test/package.json
+# REPORT_PATH=$JENKINS_WORKSPACE/$JOB_NAME/test/$REPORT_NAME
 
-export JUNIT_REPORT_PATH=$REPORT_PATH 
+# export JUNIT_REPORT_PATH=$REPORT_PATH 
 
 echo "finished deployment script"
