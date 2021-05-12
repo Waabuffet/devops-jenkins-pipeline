@@ -41,14 +41,14 @@ node {
             }
             dir('test') {
                 junit skipPublishingChecks: true, testResults: 'report.xml'
-                sh 'echo "attempting to print test result"'
-                sh 'echo "${failed_test.getErrorStackTrace()}"'
             }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
+                final AbstractTestResultAction testResult = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
+                echo "failed test name: ${testResult.failedTest.fullName}"
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
                     body: "Something is wrong with ${env.BUILD_URL}, failed message: "
