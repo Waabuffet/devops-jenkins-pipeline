@@ -26,6 +26,9 @@ node {
             }
         }
         stage('Test') {
+            dir('test') {
+                junit skipPublishingChecks: true, testResults: 'report.xml'
+            }
             dir('../devops_website@script'){
                 sh './run-test.sh'
                 currentBuild.result = 'SUCCESS'
@@ -38,9 +41,6 @@ node {
         stage('Post Build') {
             dir('../devops_website@script'){
                 sh './shutdown.sh'
-            }
-            dir('test') {
-                junit skipPublishingChecks: true, testResults: 'report.xml'
             }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
