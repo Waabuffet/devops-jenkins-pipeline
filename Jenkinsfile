@@ -47,7 +47,7 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                echo "failed test name: ${currentBuild.testResult}"
+                echo "failed test name: ${currentBuild.testResults}"
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
                     body: "Something is wrong with ${env.BUILD_URL}, failed message: "
