@@ -48,7 +48,7 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction@5ba9f1db)
+                def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
                 // echo "currentBuild.rawBuild methods: "
                 // currentBuild.rawBuild.class.methods.each{
                 //     echo "method: ${it.name}"
