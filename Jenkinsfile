@@ -49,6 +49,7 @@ node {
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
                 echo "failed test count: ${testResult.getFailCount()}"
+                def testResultAction = currentBuild.rawBuild.getAction(AbstractTestResultAction.class)
                 //def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
                 //echo "error message ${errorMessage}"
                 // the above throws an error
