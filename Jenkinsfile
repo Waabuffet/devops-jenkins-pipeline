@@ -51,15 +51,23 @@ node {
             } else {
                 
                 TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
-                //testResultAction.getResult().getFailedTests().collect { it.getTitle() }
-                echo "currentBuild.rawBuild methods: "
-                testResultAction.class.methods.each{
-                    echo "method: ${it.name}"
+                // testResultAction.failedTests
+                echo "first method"
+                testResultAction.getResult().getFailedTests().collect { 
+                    echo "${it.getTitle()}"
+                 }
+                 echo "second method"
+                testResultAction.getFailedTests().collect{ 
+                    echo "${it.getTitle()}"
                 }
-                echo "currentBuild.rawBuild properties: "
-                testResultAction.getProperties().each{
-                    echo "method: ${it.toString()}"
-                }
+                // echo "currentBuild.rawBuild methods: "
+                // testResultAction.class.methods.each{
+                //     echo "method: ${it.name}"
+                // }
+                // echo "currentBuild.rawBuild properties: "
+                // testResultAction.getProperties().each{
+                //     echo "method: ${it.toString()}"
+                // }
                 echo "failed test count: ${testResult.getFailCount()}"
                 //def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
                 //echo "error message ${errorMessage}"
