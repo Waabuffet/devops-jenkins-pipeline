@@ -49,7 +49,7 @@ node {
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
                 // def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
-                testResult.class.methods.each{
+                testResult.properties.each{
                     echo "method: ${it.name}"
                 }
                 echo "failed test count: ${testResult.getFailCount()}"
