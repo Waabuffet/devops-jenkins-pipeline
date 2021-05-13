@@ -1,3 +1,4 @@
+import hudson.tasks.junit.TestResultAction
 node {
     def testResult = ''
     try{
@@ -48,7 +49,8 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
+                
+                TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
                 // echo "currentBuild.rawBuild methods: "
                 // currentBuild.rawBuild.class.methods.each{
                 //     echo "method: ${it.name}"
