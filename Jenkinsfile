@@ -48,8 +48,11 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
-                // echo "failed test count: ${testResultAction.getFailCount()}"
+                // def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
+                testResult.class.methods.each{
+                    echo "method: ${it.name}"
+                }
+                echo "failed test count: ${testResult.getFailCount()}"
                 //def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
                 //echo "error message ${errorMessage}"
                 // the above throws an error
