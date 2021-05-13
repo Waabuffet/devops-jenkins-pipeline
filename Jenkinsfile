@@ -1,6 +1,5 @@
 import hudson.tasks.junit.TestResultAction
 node {
-    def testResult = ''
     try{
         stage('Clean up') {
             dir('../devops_website'){
@@ -42,39 +41,24 @@ node {
                 sh './shutdown.sh'
             }
             dir('test') {
-                testResult = junit skipPublishingChecks: true, testResults: 'report.xml'
+                junit skipPublishingChecks: true, testResults: 'report.xml'
             }
             if(currentBuild.result == 'SUCCESS') {
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                
-                TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
-                // testResultAction.failedTests
-                echo "first method"
-                def errorMessage = testResultAction.getResult().getFailedTests()[0].getErrorDetails()
-                echo "error: ${errorMessage}"
-                //  echo "second method"
-                // testResultAction.getFailedTests().collect{ 
-                //     echo "${it.getTitle()}"
-                // }
-                // echo "currentBuild.rawBuild methods: "
-                // testResultAction.class.methods.each{
-                //     echo "method: ${it.name}"
-                // }
-                // echo "currentBuild.rawBuild properties: "
-                // testResultAction.getProperties().each{
-                //     echo "method: ${it.toString()}"
-                // }
-                echo "failed test count: ${testResult.getFailCount()}"
-                //def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
-                //echo "error message ${errorMessage}"
-                // the above throws an error
+                def errorMessage = ''
+                try{
+                    TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
+                    errorMessage = testResultAction.getResult().getFailedTests()[0].getErrorDetails()
+                } catch (e2){
+                    // nothign to be done here
+                }
                 
                 emailext to: 'developerdoms@gmail.com',
                     subject: "Failed Build: ${currentBuild.fullDisplayName}",
-                    body: "Something is wrong with ${env.BUILD_URL}, failed message: "
+                    body: "Something is wrong with ${env.BUILD_URL}, failed message: ${errorMessage}"
             }
         }
     }
