@@ -50,8 +50,8 @@ node {
             } else {
                 def errorMessage = ''
                 try{
-                    // TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
-                    // errorMessage = testResultAction.getResult().getFailedTests()[0].getErrorDetails()
+                    TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
+                    errorMessage = testResultAction.getResult().getFailedTests()[0].getErrorDetails()
                 } catch (e2){
                     // nothign to be done here
                 }
