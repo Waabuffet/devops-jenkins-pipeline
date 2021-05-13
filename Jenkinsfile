@@ -53,13 +53,12 @@ node {
                 TestResultAction testResultAction = currentBuild.rawBuild.getAction(TestResultAction.class)
                 // testResultAction.failedTests
                 echo "first method"
-                testResultAction.getResult().getFailedTests().collect { 
-                    echo "${it.getTitle()}"
-                 }
-                 echo "second method"
-                testResultAction.getFailedTests().collect{ 
-                    echo "${it.getTitle()}"
-                }
+                def errorMessage = testResultAction.getResult().getFailedTests()[0].getErrorDetails()
+                echo "error: ${errorMessage}"
+                //  echo "second method"
+                // testResultAction.getFailedTests().collect{ 
+                //     echo "${it.getTitle()}"
+                // }
                 // echo "currentBuild.rawBuild methods: "
                 // testResultAction.class.methods.each{
                 //     echo "method: ${it.name}"
