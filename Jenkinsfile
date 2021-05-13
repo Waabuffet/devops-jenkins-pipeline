@@ -48,15 +48,15 @@ node {
                     subject: "Build Successful: ${currentBuild.fullDisplayName}",
                     body: "Check Build output ${env.BUILD_URL}"
             } else {
-                // def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction.class)
-                echo "currentBuild.rawBuild methods: "
-                currentBuild.rawBuild.class.methods.each{
-                    echo "method: ${it.name}"
-                }
-                echo "currentBuild.rawBuild properties: "
-                currentBuild.rawBuild.getProperties().each{
-                    echo "method: ${it.toString()}"
-                }
+                def testResultAction = currentBuild.rawBuild.getAction(hudson.tasks.junit.TestResultAction@5ba9f1db)
+                // echo "currentBuild.rawBuild methods: "
+                // currentBuild.rawBuild.class.methods.each{
+                //     echo "method: ${it.name}"
+                // }
+                // echo "currentBuild.rawBuild properties: "
+                // currentBuild.rawBuild.getProperties().each{
+                //     echo "method: ${it.toString()}"
+                // }
                 echo "failed test count: ${testResult.getFailCount()}"
                 //def errorMessage = currentBuild.rawBuild.getTestResultAction.getFailedTests().get(0).getFailedTests()getErrorDetails()
                 //echo "error message ${errorMessage}"
