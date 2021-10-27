@@ -26,7 +26,7 @@ ENV_PHP=$JENKINS_WORKSPACE/$JOB_NAME/website/db/env.php
 cp "$JENKINS_WORKSPACE/$JOB_NAME@script/env.php" $ENV_PHP
 
 sed -i "s/<MYSQL_HOST>/$mysql_ip/" $ENV_PHP
-sed -i "s/<MYSQL_PORT>/3306/" $ENV_PHP
+sed -i "s/<MYSQL_PORT>/$MYSQL_PORT/" $ENV_PHP
 sed -i "s/<MYSQL_DB>/$MYSQL_DATABASE/" $ENV_PHP
 sed -i "s/<MYSQL_USER>/$MYSQL_USER/" $ENV_PHP
 sed -i "s/<MYSQL_PASS>/$MYSQL_PASSWORD/" $ENV_PHP
