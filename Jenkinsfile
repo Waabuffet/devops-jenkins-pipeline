@@ -9,6 +9,7 @@ node {
         stage('Checkout') {
             dir('website') {
                 git url: 'https://github.com/Waabuffet/devops-website', branch: "dev-branch"
+                // update: use BRANCH_NAME env variable to get the branch name to be able to do this on from branch
             }
             dir('test') {
                 git url: 'https://github.com/Waabuffet/devops-test', branch: "main"
